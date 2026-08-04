@@ -6,7 +6,6 @@ resource "aws_launch_template" "web" {
   user_data     = base64encode(file("user_data.sh"))
 
   network_interfaces {
-    subnet_id                   = aws_subnet.lb_subnet.id
     security_groups             = [aws_security_group.terra_lb_sg.id]
     associate_public_ip_address = true
   }
