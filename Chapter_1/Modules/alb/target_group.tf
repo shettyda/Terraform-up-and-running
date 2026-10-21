@@ -1,8 +1,8 @@
 resource "aws_lb_target_group" "lb_tg" {
-  name     = "lb-target-group"
-  port     = 80
-  protocol = "HTTP"
-  vpc_id   = aws_vpc.terra_vpc.id
+  name     = var.lb_target_group_name
+  port     = var.lb_target_group_port
+  protocol = var.target_group_protocal
+  vpc_id   = var.vpc_id
 
   #resource "aws_vpc" "terra_vpc" {
   # cidr_block = "10.0.0.0/16" 
@@ -11,7 +11,7 @@ resource "aws_lb_target_group" "lb_tg" {
   # HealthCheck 
 
   health_check {
-    path                = "/"
+    path                = var.health_check_path
     interval            = 10
     matcher             = "200"
     protocol            = "HTTP"

@@ -1,7 +1,7 @@
 
 resource "aws_security_group" "terra_instance_sg" {
   name   = "Terra_Created_SG"
-  vpc_id = aws_vpc.terra_vpc.id
+  vpc_id = var.vpc_id
 
   ingress {
     from_port       = 80
@@ -33,7 +33,7 @@ resource "aws_security_group" "terra_instance_sg" {
 
 resource "aws_security_group" "terra_lb_sg" {
   name   = "lb_sg"
-  vpc_id = aws_vpc.terra_vpc.id
+  vpc_id = var.vpc_id
 
   ingress {
     from_port   = 80

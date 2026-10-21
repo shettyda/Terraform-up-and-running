@@ -1,12 +1,11 @@
 resource "aws_launch_template" "web" {
   name          = "Terra_up_running"
-  instance_type = "t2.micro"
-  image_id      = "ami-09d88f7c4c272b0c5"
-  key_name      = aws_key_pair.terra_up_running.key_name
-  user_data     = base64encode(file("user_data.sh"))
+  instance_type = var.instance_type
+  image_id      = var.ami_id
+  user_data     = base64encode(file("${path.module}/user_data.sh"))
 
   network_interfaces {
-    security_groups             = [aws_security_group.terra_lb_sg.id]
+    security_groups             = var.security_group_ids
     associate_public_ip_address = true
   }
 
@@ -14,8 +13,6 @@ resource "aws_launch_template" "web" {
     resource_type = "instance"
     tags = {
       Name = "Terra_web"
-
     }
-
   }
 }
