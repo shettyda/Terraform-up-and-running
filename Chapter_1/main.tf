@@ -20,9 +20,9 @@ module "alb" {
 
 module "compute" {
   source             = "./Modules/compute"
-  min_instance       = 2
+  min_instance       = 2
   max_instance       = 3
-  desired_instance   = 2
+  desired_instance   = 2
   subnet_id          = module.network.subnet_ids
   target_group_arn   = [module.alb.target_group_arn]
   security_group_ids = [module.security.instance_sg_id]
